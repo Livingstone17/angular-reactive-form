@@ -1,0 +1,94 @@
+<!-- <div class="container">
+  <form>
+    <div class="form">
+      <input class="form-control" type="text" name="love" id="" />
+      <button class="btn btn-primary">Propose</button>
+    </div>
+  </form>
+</div> -->
+
+<div *ngIf="!name; else forminfo">
+  <form [formGroup]="myForm" (ngSubmit)="addPost(myForm.value)">
+    <div class="form-container">
+      <div class="">
+        <h3>Update Your Bio</h3>
+        <div class="formGroup">
+          <label
+            >name
+            <input type="text" formControlName="name" />
+          </label>
+          <div
+            class="alert"
+            *ngIf="
+              !myForm.controls['name'].valid && myForm.controls['name'].touched
+            "
+          >
+            <p>{{ errorAlert }}</p>
+          </div>
+        </div>
+        <div class="formGroup">
+          <label>
+            email
+            <input type="email" formControlName="email" id="email" />
+          </label>
+          <div
+            class="alert"
+            *ngIf="
+              !myForm.controls['email'].valid &&
+              myForm.controls['email'].touched
+            "
+          >
+            <p>{{ errorAlert2 }}</p>
+          </div>
+        </div>
+
+        <div class="formGroup">
+          <label>
+            About Me
+            <textarea
+              formControlName="description"
+              cols="30"
+              rows="5"
+            ></textarea>
+          </label>
+          <div
+            class="alert"
+            *ngIf="
+              !myForm.controls['description'].valid &&
+              myForm.controls['description'].touched
+            "
+          >
+            <p>
+              You must specify a description thats between 30 and 500 characters
+            </p>
+          </div>
+          <em class="alert">required</em>
+        </div>
+
+        <!-- <label for="validate">Minimum of 3 Characters</label> -->
+        <!-- <Label>
+          <input
+            type="checkbox"
+            name="validate"
+            formControlName="validate"
+            value="0"
+          />On
+        </Label> -->
+
+        <input
+          type="submit"
+          value="Submit Form"
+          class="button expanded"
+          [disabled]="!myForm.valid"
+        />
+      </div>
+    </div>
+  </form>
+</div>
+
+<ng-template #forminfo>
+  <div class="form-container">
+    <h1>Welcome {{ name }},</h1>
+    <p>{{ description }}</p>
+  </div>
+</ng-template>
